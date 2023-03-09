@@ -7,7 +7,7 @@
 [doris-spark-connector](https://github.com/apache/doris-spark-connector)写入时获取be节点的接口与starrocks略有出入, 因此会导致无法写入.
 
 - [starrocks-connector-for-apache-spark](https://github.com/StarRocks/starrocks-connector-for-apache-spark)不支持写入   
-ps: 最近我又看了下源码发现有支持写入的分支推上去了, 但有些sdk包拉不下来。
+ps: 最近我又看了下源码发现有支持写入的分支推上去了, 但有些依赖的sdk包拉不下来，无法完成编译，还是没法用。
 
 将两个结合一下，现阶段主要是方便自用。等后面starrocks-connector-for-apache-spark生态比较好了直接用starrocks-connector-for-apache-spark。
 
