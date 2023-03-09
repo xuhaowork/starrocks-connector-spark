@@ -52,7 +52,6 @@ class StarrocksSourceProvider extends DataSourceRegister
                               parameters: Map[String, String],
                               data: DataFrame): BaseRelation = {
     val sparkSettings = new SparkSettings(sqlContext.sparkContext.getConf)
-    println(parameters)
     sparkSettings.merge(Utils.params(parameters, log).asJava)
 
     val feNodesString = sparkSettings.getProperty(ConfigurationOptions.STARROCKS_FENODES)
@@ -61,8 +60,15 @@ class StarrocksSourceProvider extends DataSourceRegister
       case HOST_PORT_PATTERN(host, port) => (host, port.toInt)
       case _ => throw new IllegalArgumentException(s"输入的参数${ConfigurationOptions.STARROCKS_FENODES}不合法, 形式应为: 'ip:port,ip2:port2'")
     }
-    val database: String = sparkSettings.getProperty(ConfigurationOptions.STARROCKS_DB_IDENTIFIER)
-    val table: String = sparkSettings.getProperty(ConfigurationOptions.STARROCKS_TABLE_IDENTIFIER)
+    val dbtable: String = sparkSettings.getProperty(ConfigurationOptions.STARROCKS_TABLE_IDENTIFIER)
+    if(dbtable == null) {
+      throw new IllegalArgumentException(s"未设置${ConfigurationOptions.STARROCKS_TABLE_IDENTIFIER}")
+    }
+    if(dbtable.split("\\.").length != 2) {
+      throw new IllegalArgumentException(s"${ConfigurationOptions.STARROCKS_TABLE_IDENTIFIER}形式为database.table形式")
+    }
+
+    val Array(database, table) = dbtable.split("\\.")
     val user: String = parameters("user")
     val password: String = parameters("password")
     // init stream loader
@@ -155,6 +161,4 @@ class StarrocksSourceProvider extends DataSourceRegister
 }
 
 
-object StarrocksSourceProvider {
-
-}
+object StarrocksSourceProvider

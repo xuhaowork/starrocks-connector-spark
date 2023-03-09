@@ -19,7 +19,7 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
-        <spark.lib.scope>compile</spark.lib.scope>
+        <spark.lib.scope>provided</spark.lib.scope>
     </properties>
 
 
@@ -276,5 +276,8 @@
             </plugin>
         </plugins>
     </build>
+
+
+<!--    <distributionManagement></distributionManagement>-->
 
 </project>
