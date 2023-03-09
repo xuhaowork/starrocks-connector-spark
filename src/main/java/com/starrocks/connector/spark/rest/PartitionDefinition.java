@@ -36,7 +36,7 @@ public class PartitionDefinition implements Serializable, Comparable<PartitionDe
     private final String database;
     private final String table;
 
-    private final String beAddress;
+    private String beAddress;
     private final Set<Long> tabletIds;
     private final String queryPlan;
     private final String serializedSettings;
@@ -58,6 +58,10 @@ public class PartitionDefinition implements Serializable, Comparable<PartitionDe
 
     public String getBeAddress() {
         return beAddress;
+    }
+
+    public void setBeAddress(String address) {
+        beAddress = address;
     }
 
     public Set<Long> getTabletIds() {

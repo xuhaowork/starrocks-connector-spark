@@ -42,6 +42,10 @@ private[spark] abstract class AbstractStarrocksRDDIterator[T](
     val valueReaderName = settings.getProperty(STARROCKS_VALUE_READER_CLASS)
     logDebug(s"Use value reader '$valueReaderName'.")
     val cons = Class.forName(valueReaderName).getDeclaredConstructor(classOf[PartitionDefinition], classOf[Settings])
+    if(settings.getProperty("starrocks.force.be") != null) {
+      log.warn("force be: {}", settings.getProperty("force.be"))
+      partition.setBeAddress(settings.getProperty("force.be"))
+    }
     cons.newInstance(partition, settings).asInstanceOf[ScalaValueReader]
   }
 

@@ -26,7 +26,6 @@ public interface ConfigurationOptions {
     String STARROCKS_DEFAULT_CLUSTER = "default_cluster";
 
     String TABLE_IDENTIFIER = "table.identifier";
-    String STARROCKS_DB_IDENTIFIER = "starrocks.db.identifier";
     String STARROCKS_TABLE_IDENTIFIER = "starrocks.table.identifier";
     String STARROCKS_READ_FIELD = "starrocks.read.field";
     String STARROCKS_WRITE_FIELDS = "starrocks.write.fields";
