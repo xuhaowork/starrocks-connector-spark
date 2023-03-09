@@ -14,6 +14,7 @@ import java.net.{HttpURLConnection, URL}
 import java.nio.charset.{Charset, StandardCharsets}
 import java.util
 import java.util.{Date, Random}
+import java.util.UUID
 
 class StreamLoader(
                     val feNodes: Array[(String, Int)],
@@ -110,7 +111,8 @@ class StreamLoader(
    * @return (http请求返回代码, msg, 返回数据)
    */
   def loadAsJson(value: String): (Int, String, String) = {
-    val label = table + "_" + System.currentTimeMillis()
+    val label = table + s"_${UUID.randomUUID().toString}_" + System.currentTimeMillis()
+
     val conn = getConnection(loadUrl, label)
 
     var status = -1
